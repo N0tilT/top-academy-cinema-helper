@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaHelper.Integration", "CinemaHelper\CinemaHelper.Integration.csproj", "{59DFD24D-C61C-458C-A947-2F4179579849}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaHelper.Integration", "CinemaHelper\CinemaHelper.Integration.csproj", "{59DFD24D-C61C-458C-A947-2F4179579849}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaHelper.Core", "CinemaHelper.Core\CinemaHelper.Core.csproj", "{7CE7B774-7F0E-4ED0-B940-C8842288471F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaHelper.Core", "CinemaHelper.Core\CinemaHelper.Core.csproj", "{7CE7B774-7F0E-4ED0-B940-C8842288471F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaHelper.App", "CinemaHelper.App\CinemaHelper.App.csproj", "{C06E2A93-134D-48C6-9328-DC157144CBF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7CE7B774-7F0E-4ED0-B940-C8842288471F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CE7B774-7F0E-4ED0-B940-C8842288471F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CE7B774-7F0E-4ED0-B940-C8842288471F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C06E2A93-134D-48C6-9328-DC157144CBF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C06E2A93-134D-48C6-9328-DC157144CBF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C06E2A93-134D-48C6-9328-DC157144CBF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C06E2A93-134D-48C6-9328-DC157144CBF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
