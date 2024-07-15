@@ -7,7 +7,31 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
         <StackPanel 
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            >
+            <ListBox 
+                ItemsSource="{Binding CinemaList}"
+                SelectedItem="{Binding SelectedCinema}"
+                >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="40" Text="{Binding Id}"/>
+                        <TextBlock FontSize="40" Text="{Binding Title}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <StackPanel 
+            Grid.Column="0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             >

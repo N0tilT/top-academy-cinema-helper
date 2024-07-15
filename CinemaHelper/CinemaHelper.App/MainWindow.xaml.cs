@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using CinemaHelper.Core.Data;
+using CinemaHelper.Core.Service;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,7 +18,7 @@ namespace CinemaHelper.App
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainViewModel viewModel = new MainViewModel();
+        private MainViewModel viewModel = new MainViewModel(new CinemaService(new CinemaDataSource()));
         public MainWindow()
         {
             DataContext = viewModel;
