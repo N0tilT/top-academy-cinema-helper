@@ -21,10 +21,14 @@ namespace CinemaHelper.Core.Data
         {
             if (File.Exists(path))
             {
-                string data = File.ReadAllText(path);
-                var tmp = DataSerializer.Deserialize<List<Cinema>>(data) ?? [];
-                Cinema._id_counter = tmp.Count > 0 ? tmp.Select(x => x.ItemId).Max() + 1 : 0;
-                return tmp;
+                using(StreamReader reader = new StreamReader(path))
+                {
+                    string data = reader.ReadToEnd();
+                    var tmp = DataSerializer.Deserialize<List<Cinema>>(data) ?? [];
+                    Cinema._id_counter = tmp.Count > 0 ? tmp.Select(x => x.ItemId).Max() + 1 : 0;
+                    return tmp;
+                }
+                
             }
             return [];
         }
@@ -36,7 +40,10 @@ namespace CinemaHelper.Core.Data
         /// <returns></returns>
         public void Write(List<Cinema> data)
         {
-            File.WriteAllText(path, DataSerializer.Serialize(data));
+            using (StreamWriter writer = new StreamWriter(path,false)) {
+
+                writer.WriteLine(DataSerializer.Serialize(data));
+            }
         }
     }
 }
