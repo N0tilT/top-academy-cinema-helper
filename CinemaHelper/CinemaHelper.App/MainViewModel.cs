@@ -13,13 +13,29 @@ namespace CinemaHelper.App
 {
     public class MainViewModel : ObservableObject
     {
+
+        private string _input = string.Empty;
+        public string Input
+        {
+            get => _input;
+            set
+            {
+                _input = value;
+                OnPropertyChanged("Input");
+            }
+        }
+
         private ObservableCollection<Cinema> _cinemaList = new ObservableCollection<Cinema>();
         public ObservableCollection<Cinema> CinemaList { get => _cinemaList; set { _cinemaList = value; OnPropertyChanged("CinemaList"); }  }
 
         private CinemaService cinemaService;
 
         private Cinema _selectedCinema;
-        public Cinema SelectedCinema { get => _selectedCinema; set { _selectedCinema = value; OnPropertyChanged("SelectedCinema"); } }
+        public Cinema SelectedCinema { get => _selectedCinema; 
+            set { 
+                _selectedCinema = value;
+                OnPropertyChanged("SelectedCinema");
+            } }
 
         public MainViewModel(CinemaService service)
         {
@@ -27,56 +43,40 @@ namespace CinemaHelper.App
             CinemaList = new ObservableCollection<Cinema>(cinemaService.GetAll());
         }
 
-        #region LeftSide
-        private string _input = string.Empty;
-        public string Input {
-            get => _input; 
-            set { 
-                _input = value; 
-                OnPropertyChanged("Input");
-            } 
-        }
 
-        private string _output = string.Empty;
-        public string Output
-        {
-            get => _output;
-            set
-            {
-                _output = value;
-                OnPropertyChanged("Output");
-            }
-        }
-
-        private RelayCommand showCommand;
-        public RelayCommand ShowCommand
+        private RelayCommand addCommand;
+        public RelayCommand AddCommand
         {
             get
             {
-                return showCommand ??
-                  (showCommand = new RelayCommand(obj =>
+                return addCommand ??
+                  (addCommand = new RelayCommand(obj =>
                   {
-                      Output = Input;
+                      cinemaService.Create(
+                          new Cinema(0, Input)
+                          );
+                      CinemaList = new ObservableCollection<Cinema>(cinemaService.GetAll());
                   }));
             }
         }
 
-        private RelayCommand clearCommand;
-        public RelayCommand ClearCommand
+        private RelayCommand deleteCommand;
+        public RelayCommand DeleteCommand
         {
             get
             {
-                return clearCommand ??
-                  (clearCommand = new RelayCommand(obj =>
+                return deleteCommand ??
+                  (deleteCommand = new RelayCommand(obj =>
                   {
-                      Output = string.Empty;
-                      Input = string.Empty;
+                      cinemaService.Delete(
+                          SelectedCinema.Id
+                          );
+                      CinemaList = new ObservableCollection<Cinema>(cinemaService.GetAll());
                   }));
             }
         }
 
 
-        #endregion
 
     }
 }

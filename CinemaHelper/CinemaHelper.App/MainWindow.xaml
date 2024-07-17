@@ -45,29 +45,29 @@
                 FontSize="30" 
                 Background="LightGreen"
                 Margin="10"
-                x:Name="Output"
-                Text="{Binding Output}"/>
+                x:Name="SelectedFilmTitle"
+                Text="{Binding Path=SelectedCinema.Title}"/>
             <Button 
                 Margin="10 10 10 0"
                 Height="100"
                 Width="300"
-                Content="Нажми меня"
+                Content="Добавить"
                 Background="Coral"
                 FontSize="30"
                 BorderBrush="Transparent"
                 x:Name="PressMeButton"
-                Command="{Binding ShowCommand}"
+                Command="{Binding AddCommand}"
                 />
             <Button 
                 Margin="10"
                 Height="100"
                 Width="300"
-                Content="Не нажимай меня"
+                Content="Удалить"
                 Background="Red"
                 FontSize="30"
                 BorderBrush="Transparent"
                 x:Name="DontPressMeButton"
-                Command="{Binding ClearCommand}"
+                Command="{Binding DeleteCommand}"
                 />
         </StackPanel>
     </Grid>
