@@ -1,13 +1,7 @@
 ﻿using CinemaHelper.App.Core;
 using CinemaHelper.Core;
-using CinemaHelper.Core.Data;
 using CinemaHelper.Core.Service;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaHelper.App
 {
@@ -26,16 +20,20 @@ namespace CinemaHelper.App
         }
 
         private ObservableCollection<Cinema> _cinemaList = new ObservableCollection<Cinema>();
-        public ObservableCollection<Cinema> CinemaList { get => _cinemaList; set { _cinemaList = value; OnPropertyChanged("CinemaList"); }  }
+        public ObservableCollection<Cinema> CinemaList { get => _cinemaList; set { _cinemaList = value; OnPropertyChanged("CinemaList"); } }
 
         private CinemaService cinemaService;
 
         private Cinema _selectedCinema;
-        public Cinema SelectedCinema { get => _selectedCinema; 
-            set { 
+        public Cinema SelectedCinema
+        {
+            get => _selectedCinema;
+            set
+            {
                 _selectedCinema = value;
                 OnPropertyChanged("SelectedCinema");
-            } }
+            }
+        }
 
         public MainViewModel(CinemaService service)
         {
@@ -53,7 +51,7 @@ namespace CinemaHelper.App
                   (addCommand = new RelayCommand(obj =>
                   {
                       cinemaService.Create(
-                          new Cinema(0, Input)
+                          new Cinema(Input)
                           );
                       CinemaList = new ObservableCollection<Cinema>(cinemaService.GetAll());
                   }));

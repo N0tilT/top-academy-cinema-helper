@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaHelper.Core
 {
@@ -22,7 +17,7 @@ namespace CinemaHelper.Core
         /// </summary>
         /// <param name="id"></param>
         /// <param name="title"></param>
-        public Cinema(int id, string title = "Some cinema")
+        public Cinema(string title = "Some cinema")
         {
             ItemId = _id_counter++;
             Title = title;
@@ -33,10 +28,10 @@ namespace CinemaHelper.Core
 
         public string Title { get; set; }
 
-        
+
         public override string ToString()
         {
-            return ItemId+"|"+Title;
+            return ItemId + "|" + Title;
         }
     }
 }

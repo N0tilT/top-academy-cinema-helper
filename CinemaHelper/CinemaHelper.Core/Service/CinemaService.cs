@@ -1,9 +1,4 @@
 ﻿using CinemaHelper.Core.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaHelper.Core.Service
 {
@@ -35,7 +30,7 @@ namespace CinemaHelper.Core.Service
         public Cinema Get(int id)
         {
             foreach (Cinema cinema in _cinemas)
-                if(cinema.ItemId == id)
+                if (cinema.ItemId == id)
                     return cinema;
             return null;
         }

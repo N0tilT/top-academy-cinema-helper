@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CinemaHelper.Core.Utility;
+﻿using CinemaHelper.Core.Utility;
 
 namespace CinemaHelper.Core.Data
 {
@@ -28,7 +23,7 @@ namespace CinemaHelper.Core.Data
             {
                 string data = File.ReadAllText(path);
                 var tmp = DataSerializer.Deserialize<List<Cinema>>(data) ?? [];
-                Cinema._id_counter = tmp.Count > 0 ? tmp.Select(x=>x.ItemId).Max() + 1 : 0;
+                Cinema._id_counter = tmp.Count > 0 ? tmp.Select(x => x.ItemId).Max() + 1 : 0;
                 return tmp;
             }
             return [];
