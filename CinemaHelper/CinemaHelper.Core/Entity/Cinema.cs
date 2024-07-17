@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,27 +14,29 @@ namespace CinemaHelper.Core
     /// </summary>
     /// <param name="id">Уникальный идентификатор фильма</param>
     /// <param name="title">Название фильма</param>
-    public class Cinema(int id, string title="Some cinema")
+    public class Cinema
     {
-        ///// <summary>
-        ///// Обычный конструктор, до .NET8. В новых версиях доступны оба варианта
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <param name="title"></param>
-        //public Cinema(int id, string title)
-        //{
-        //    Id = id; 
-        //    Title = title;
-        //}
+        public static int _id_counter = 0;
+        /// <summary>
+        /// Обычный конструктор, до .NET8. В новых версиях доступны оба варианта
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="title"></param>
+        public Cinema(int id, string title = "Some cinema")
+        {
+            ItemId = _id_counter++;
+            Title = title;
+        }
 
-        public int Id { get; set; } = id;
+        [JsonProperty("ItemId")]
+        public int ItemId { get; set; }
 
-        public string Title { get; set; } = title;
+        public string Title { get; set; }
 
         
         public override string ToString()
         {
-            return Id+"|"+Title;
+            return ItemId+"|"+Title;
         }
     }
 }

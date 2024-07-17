@@ -17,7 +17,7 @@ namespace CinemaHelper.Core.Service
         public CinemaService(CinemaDataSource dataSource)
         {
             _dataSource = dataSource;
-            _cinemas = _dataSource.Get() ?? new List<Cinema>();
+            _cinemas = _dataSource.Get();
         }
         /// <summary>
         /// Получить все фильмы
@@ -35,7 +35,7 @@ namespace CinemaHelper.Core.Service
         public Cinema Get(int id)
         {
             foreach (Cinema cinema in _cinemas)
-                if(cinema.Id == id)
+                if(cinema.ItemId == id)
                     return cinema;
             return null;
         }
@@ -55,7 +55,7 @@ namespace CinemaHelper.Core.Service
         public void Delete(int id)
         {
             foreach (Cinema cinema in _cinemas)
-                if (cinema.Id == id)
+                if (cinema.ItemId == id)
                 {
                     _cinemas.Remove(cinema);
                     break;
@@ -69,7 +69,7 @@ namespace CinemaHelper.Core.Service
         public void Update(Cinema cinema)
         {
             for (int i = 0; i < _cinemas.Count; i++)
-                if (cinema.Id == _cinemas[i].Id)
+                if (cinema.ItemId == _cinemas[i].ItemId)
                     _cinemas[i] = cinema;
             _dataSource.Write(_cinemas);
         }

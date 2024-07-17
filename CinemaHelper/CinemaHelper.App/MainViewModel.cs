@@ -69,13 +69,29 @@ namespace CinemaHelper.App
                   (deleteCommand = new RelayCommand(obj =>
                   {
                       cinemaService.Delete(
-                          SelectedCinema.Id
+                          SelectedCinema.ItemId
                           );
                       CinemaList = new ObservableCollection<Cinema>(cinemaService.GetAll());
                   }));
             }
         }
 
+        private RelayCommand editCommand;
+        public RelayCommand EditCommand
+        {
+            get
+            {
+                return editCommand ??
+                  (editCommand = new RelayCommand(obj =>
+                  {
+                      SelectedCinema.Title = Input;
+                      cinemaService.Update(
+                          SelectedCinema
+                          );
+                      CinemaList = new ObservableCollection<Cinema>(cinemaService.GetAll());
+                  }));
+            }
+        }
 
 
     }

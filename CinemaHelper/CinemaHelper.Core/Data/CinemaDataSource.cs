@@ -27,9 +27,11 @@ namespace CinemaHelper.Core.Data
             if (File.Exists(path))
             {
                 string data = File.ReadAllText(path);
-                return DataSerializer.Deserialize<List<Cinema>>(data);
+                var tmp = DataSerializer.Deserialize<List<Cinema>>(data) ?? [];
+                Cinema._id_counter = tmp.Count > 0 ? tmp.Select(x=>x.ItemId).Max() + 1 : 0;
+                return tmp;
             }
-            return null;
+            return [];
         }
 
         /// <summary>

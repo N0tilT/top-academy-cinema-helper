@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CinemaHelper.App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -23,7 +23,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="40" Text="{Binding Id}"/>
+                        <TextBlock FontSize="40" Text="{Binding ItemId}"/>
                         <TextBlock FontSize="40" Text="{Binding Title}"/>
                         </StackPanel>
                     </DataTemplate>
@@ -55,19 +55,30 @@
                 Background="Coral"
                 FontSize="30"
                 BorderBrush="Transparent"
-                x:Name="PressMeButton"
+                x:Name="Add"
                 Command="{Binding AddCommand}"
                 />
             <Button 
-                Margin="10"
+                Margin="10 10 10 0"
                 Height="100"
                 Width="300"
                 Content="Удалить"
                 Background="Red"
                 FontSize="30"
                 BorderBrush="Transparent"
-                x:Name="DontPressMeButton"
+                x:Name="Delete"
                 Command="{Binding DeleteCommand}"
+                />
+            <Button 
+                Margin="10"
+                Height="100"
+                Width="300"
+                Content="Изменить"
+                Background="Yellow"
+                FontSize="30"
+                BorderBrush="Transparent"
+                x:Name="Edit"
+                Command="{Binding EditCommand}"
                 />
         </StackPanel>
     </Grid>
