@@ -9,11 +9,23 @@ namespace CinemaHelper.App
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainViewModel viewModel = new MainViewModel(new CinemaService(new CinemaDataSource()));
+        private MainViewModel cinemaListViewModel = new MainViewModel(new CinemaService(new CinemaDataSource()));
+        private BookingViewModel bokingViewModel = new BookingViewModel(new TicketService(new TicketDataSource()));
+
+
         public MainWindow()
         {
-            DataContext = viewModel;
             InitializeComponent();
+        }
+
+        private void BokingPage_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new BookingPage(bokingViewModel);
+        }
+
+        private void CinemaListPage_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new CinemaListPage(cinemaListViewModel);
         }
     }
 }

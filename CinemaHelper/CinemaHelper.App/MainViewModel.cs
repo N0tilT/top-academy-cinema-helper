@@ -41,7 +41,6 @@ namespace CinemaHelper.App
             CinemaList = new ObservableCollection<Cinema>(cinemaService.GetAll());
         }
 
-
         private RelayCommand addCommand;
         public RelayCommand AddCommand
         {
