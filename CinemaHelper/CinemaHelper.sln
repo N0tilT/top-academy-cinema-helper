@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaHelper.Integration", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaHelper.Core", "CinemaHelper.Core\CinemaHelper.Core.csproj", "{7CE7B774-7F0E-4ED0-B940-C8842288471F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaHelper.App", "CinemaHelper.App\CinemaHelper.App.csproj", "{C06E2A93-134D-48C6-9328-DC157144CBF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaHelper.App", "CinemaHelper.App\CinemaHelper.App.csproj", "{C06E2A93-134D-48C6-9328-DC157144CBF4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaHelper.Server", "CinemaHelper.Server\CinemaHelper.Server.csproj", "{C11110A0-5CC6-4231-B3D0-937009B18721}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C06E2A93-134D-48C6-9328-DC157144CBF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C06E2A93-134D-48C6-9328-DC157144CBF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C06E2A93-134D-48C6-9328-DC157144CBF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C11110A0-5CC6-4231-B3D0-937009B18721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11110A0-5CC6-4231-B3D0-937009B18721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11110A0-5CC6-4231-B3D0-937009B18721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11110A0-5CC6-4231-B3D0-937009B18721}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
