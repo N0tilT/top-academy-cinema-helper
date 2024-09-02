@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CinemaHelper.Server.Data;
+using CinemaHelper.Server.DTOs;
+using CinemaHelper.Server.Mapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,52 +24,41 @@ namespace Cinema.Controllers
 
         // GET: api/Cinemas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cinema>>> GetCinemas()
+        public async Task<ActionResult<IEnumerable<CinemaDTO>>> GetCinemas()
         {
-            return await _context.Cinemas.ToListAsync();
+            return await _context.Cinemas
+                .Select(x=>x.ToCinemaDTO()) 
+                .ToListAsync();
         }
 
         // GET: api/Cinemas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cinema>> GetCinema(int id)
+        public async Task<ActionResult<CinemaDTO>> GetCinema(int id)
         {
-            var cinema = await _context.Cinemas.FindAsync(id);
+            CinemaHelper.Server.Entities.Cinema? game = await _context.Cinemas.FindAsync(id);
 
-            if (cinema == null)
-            {
-                return NotFound();
-            }
-
-            return cinema;
+            return game == null 
+                ? BadRequest() : 
+                Ok(game.ToCinemaDTO());
         }
 
         // PUT: api/Cinemas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCinema(int id, Cinema cinema)
+        public async Task<IActionResult> PutCinema(int id, UpdateCinemaDto cinema)
         {
-            if (id != cinema.Id)
+            var existingCinema = await _context.Cinemas.FindAsync(id);
+
+            if (existingCinema is null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(cinema).State = EntityState.Modified;
+            _context.Entry(existingCinema)
+                     .CurrentValues
+                     .SetValues(cinema.ToEntity(id));
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CinemaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
@@ -75,26 +66,23 @@ namespace Cinema.Controllers
         // POST: api/Cinemas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Cinema>> PostCinema(Cinema cinema)
+        public async Task<IActionResult> PostCinema(AddCinemaDto newCinema)
         {
+            CinemaHelper.Server.Entities.Cinema cinema = newCinema.ToEntity();
+
             _context.Cinemas.Add(cinema);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCinema", new { id = cinema.Id }, cinema);
+            return Ok();
         }
 
         // DELETE: api/Cinemas/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCinema(int id)
         {
-            var cinema = await _context.Cinemas.FindAsync(id);
-            if (cinema == null)
-            {
-                return NotFound();
-            }
-
-            _context.Cinemas.Remove(cinema);
-            await _context.SaveChangesAsync();
+            await _context.Cinemas
+                     .Where(game => game.Id == id)
+                     .ExecuteDeleteAsync();
 
             return NoContent();
         }
