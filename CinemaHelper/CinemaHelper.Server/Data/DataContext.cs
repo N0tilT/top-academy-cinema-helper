@@ -10,16 +10,8 @@ namespace CinemaHelper.Server.Data
         {
         }
 
-        public DbSet<Cinema> Cinemas { get; set; }
+        public DbSet<Entities.Cinema> Cinemas { get; set; }
         public DbSet<Author> Authors { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfiguration(new Cinema.Configuration());
-            modelBuilder.ApplyConfiguration(new Author.Configuration());
-
-            base.OnModelCreating(modelBuilder);
-        }
 
     }
 }

@@ -1,6 +1,10 @@
-﻿namespace CinemaHelper.Server.DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CinemaHelper.Server.DTOs
 {
-    public class AddCinemaDTO
-    {
-    }
+    public record class AddCinemaDto(
+        [Required][StringLength(256)] string Title,
+        [Required] int AuthorId,
+        string Description
+    );
 }
