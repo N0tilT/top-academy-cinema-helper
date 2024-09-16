@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Cinema.Migrations
+namespace CinemaHelper.Server.Migrations.Data
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240830170821_Init")]
+    [Migration("20240916162738_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -19,7 +19,7 @@ namespace Cinema.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
-            modelBuilder.Entity("Cinema.Author", b =>
+            modelBuilder.Entity("CinemaHelper.Server.Entities.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -27,7 +27,6 @@ namespace Cinema.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -35,46 +34,39 @@ namespace Cinema.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("Cinema.Cinema", b =>
+            modelBuilder.Entity("CinemaHelper.Server.Entities.Cinema", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Author_id")
+                    b.Property<int>("AuthorId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(2048)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(64)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Author_id");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Cinemas");
                 });
 
-            modelBuilder.Entity("Cinema.Cinema", b =>
+            modelBuilder.Entity("CinemaHelper.Server.Entities.Cinema", b =>
                 {
-                    b.HasOne("Cinema.Author", "Author")
-                        .WithMany("Cinemas")
-                        .HasForeignKey("Author_id")
+                    b.HasOne("CinemaHelper.Server.Entities.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("Cinema.Author", b =>
-                {
-                    b.Navigation("Cinemas");
                 });
 #pragma warning restore 612, 618
         }

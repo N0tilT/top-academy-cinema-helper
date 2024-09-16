@@ -1,4 +1,7 @@
 using CinemaHelper.Server.Data;
+using CinemaHelper.Server.Entities;
+using CinemaHelper.Server.Extensions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
+    .AddCookie(IdentityConstants.ApplicationScheme)
+    .AddBearerToken(IdentityConstants.BearerScheme);
+
+builder.Services.AddIdentityCore<User>()
+    .AddEntityFrameworkStores<AuthDataContext>()
+    .AddApiEndpoints();
+
+builder.Services.AddDbContext<AuthDataContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("Auth")));
+
 builder.Services.AddDbContext<DataContext>(options => 
     options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
@@ -20,12 +36,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.ApplyMigrations();
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
+//app.MapIdentityApi<User>();
 app.MapControllers();
+
 
 app.Run();

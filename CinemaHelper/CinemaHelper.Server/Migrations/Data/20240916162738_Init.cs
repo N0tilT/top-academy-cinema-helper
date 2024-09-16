@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Cinema.Migrations
+namespace CinemaHelper.Server.Migrations.Data
 {
     /// <inheritdoc />
     public partial class Init : Migration
@@ -16,7 +16,7 @@ namespace Cinema.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,25 +29,25 @@ namespace Cinema.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", maxLength: 64, nullable: false),
-                    Description = table.Column<string>(type: "TEXT", maxLength: 2048, nullable: false),
-                    Author_id = table.Column<int>(type: "INTEGER", nullable: false)
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    AuthorId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cinemas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cinemas_Authors_Author_id",
-                        column: x => x.Author_id,
+                        name: "FK_Cinemas_Authors_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "Authors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cinemas_Author_id",
+                name: "IX_Cinemas_AuthorId",
                 table: "Cinemas",
-                column: "Author_id");
+                column: "AuthorId");
         }
 
         /// <inheritdoc />

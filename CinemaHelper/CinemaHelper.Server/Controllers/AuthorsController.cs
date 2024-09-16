@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CinemaHelper.Server.Entities;
 using CinemaHelper.Server.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cinema.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class AuthorsController : ControllerBase
+    public class AuthorsController : Controller
     {
         private readonly DataContext _context;
 
