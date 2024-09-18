@@ -12,6 +12,7 @@ namespace CinemaHelper.Server.Data
 
         public DbSet<Entities.Cinema> Cinemas { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<User> Users { get; set; }
 
     }
 }
